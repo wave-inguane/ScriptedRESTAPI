@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>7cf9de2a134b1200ed373d62f244b050</enforce_acl>
+        <http_method>GET</http_method>
+        <name>Retrieve poll results</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+    // implement resource here
+	var id = request.pathParams.poll_id;
+	var pollHelper = new x_snc_polls.PollData_Retriever();
+	/*
+	BEST PRACTICES 
+		Do: Use the GlideRecordSecure API in your Scripted REST API Resource scripts to ensure that you are enforcing existing access controls on the requesting user when interacting with ServiceNow records. 
+		Do: Test your access controls, both Authentication and Authorization, before making your API available to consumers.
+	*/
+	var pollRecord = new GlideRecordSecure("x_snc_polls_poll");
+	pollRecord.get(id);
+	if (!pollRecord.isValidRecord()) {
+		throw new sn_ws_err.NotFoundError("Poll not found");
+	}
+
+	var pollResponse = {
+		name: pollRecord.getValue("name"),
+		questions: pollHelper.getResultsByUser(id)
+	};
+	return pollResponse;
+
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_snc_polls/v1/poll/{poll_id}/results</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/{poll_id}/results</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-10-21 13:56:36</sys_created_on>
+        <sys_id>157e77d5db112300c6549b81ca96194c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Retrieve poll results</sys_name>
+        <sys_package display_value="Polls" source="x_snc_polls">cd1f2766133e1200ed373d62f244b082</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Polls">cd1f2766133e1200ed373d62f244b082</sys_scope>
+        <sys_update_name>sys_ws_operation_157e77d5db112300c6549b81ca96194c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-10-21 13:56:36</sys_updated_on>
+        <web_service_definition display_value="Poll">e917dee6134b1200ed373d62f244b08f</web_service_definition>
+        <web_service_version display_value="v1">a227dee6134b1200ed373d62f244b0cd</web_service_version>
+    </sys_ws_operation>
+</record_update>
