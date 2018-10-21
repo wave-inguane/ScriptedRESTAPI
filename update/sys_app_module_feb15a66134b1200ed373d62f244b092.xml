@@ -20,12 +20,9 @@
         <query/>
         <report/>
         <roles/>
-        <survey/>
-        <survey_overwrite>true</survey_overwrite>
         <sys_class_name>sys_app_module</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2016-04-30 21:50:16</sys_created_on>
-        <sys_customer_update>true</sys_customer_update>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>feb15a66134b1200ed373d62f244b092</sys_id>
@@ -34,7 +31,6 @@
         <sys_overrides/>
         <sys_package display_value="Polls" source="x_snc_polls">cd1f2766133e1200ed373d62f244b082</sys_package>
         <sys_policy/>
-        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Polls">cd1f2766133e1200ed373d62f244b082</sys_scope>
         <sys_update_name>sys_app_module_feb15a66134b1200ed373d62f244b092</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
