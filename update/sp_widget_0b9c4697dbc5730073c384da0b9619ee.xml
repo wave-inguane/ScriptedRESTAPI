@@ -2,9 +2,10 @@
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
         <client_script><![CDATA[
-function($scope,$http, spUtil) {//x_snc_polls_poll
+function($scope,$http, spUtil) {//x_snc_polls_poll.list
 	/* widget controller */
 	var c = this;
+	var baseUrl = "";
 
 	/*
 	function parseQuery(table, queryString){
@@ -13,6 +14,82 @@ function($scope,$http, spUtil) {//x_snc_polls_poll
 		});
 	}
 */
+
+	/*
+	$http.get("productData.json").then(function (response) {
+console.log("Status: " + response.status);
+console.log("Type: " + response.headers("content-type"));
+console.log("Length: " + response.headers("content-length"));
+$scope.products = response.data;
+});
+	*/
+
+
+	/* XML FILE
+	<products>
+<product name="Apples" category="Fruit" price="1.20" expiry="10" />
+<product name="Bananas" category="Fruit" price="2.42" expiry="7" />
+<product name="Pears" category="Fruit" price="2.02" expiry="10" />
+<product name="Tuna" category="Fish" price="20.45" expiry="3" />
+<product name="Salmon" category="Fish" price="17.93" expiry="2" />
+<product name="Trout" category="Fish" price="12.93" expiry="4" />
+</products>
+
+<script>
+angular.module("exampleApp", [])
+.controller("defaultCtrl", function ($scope, $http) {
+$scope.loadData = function () {
+$http.get("productData.xml").then(function (response) {
+$scope.products = [];
+var productElems = angular.element(response.data.trim()).find("product");
+for (var i = 0; i < productElems.length; i++) {
+var product = productElems.eq(i);
+$scope.products.push({
+name: product.attr("name"),
+category: product.attr("category"),
+price: product.attr("price")
+});
+}
+});
+}
+});
+</script>
+
+
+<script>
+angular.module("exampleApp", [])
+.controller("defaultCtrl", function ($scope, $http) {
+$scope.loadData = function () {
+var config = {
+transformResponse: function (data, headers) {
+if(headers("content-type") == "application/xml"
+&& angular.isString(data)) {
+products = [];
+var productElems = angular.element(data.trim()).find("product");
+for (var i = 0; i < productElems.length; i++) {
+var product = productElems.eq(i);
+products.push({
+name: product.attr("name"),
+category: product.attr("category"),
+price: product.attr("price")
+});
+}
+return products;
+} else {
+return data;
+}
+}
+}
+$http.get("productData.xml", config).success(function (data) {
+$scope.products = data;
+});
+}
+});
+</script>
+	*/
+
+
+
 
 	//--------------------------------------------------------------------------
 	// Lab 1 GET
@@ -77,19 +154,20 @@ function($scope,$http, spUtil) {//x_snc_polls_poll
 	};
 	$http.post(currApi, record)
 		.success(function (data) {
-				console.log("LAB 3 POST");
-				console.log(data);
+		console.log("LAB 3 POST");
+		console.log(data);
 	}).error(function (error) {
-			$scope.postError = error;
-			spUtil.addErrorMessage(	$scope.postError );
+		$scope.postError = error;
+		console.log("LAB 3 POST ERROR : "+$scope.postError);
+		spUtil.addErrorMessage(	$scope.postError );
 	})/*.finally(function () {
 		$location.path("/complete");
 	});*/
-	
-	
-	
+
+
+
 	// EDIT
-		currApi = 'https://dev78424.service-now.com/api/x_snc_polls/v1/poll/94a3961fdbc5730073c384da0b961941';
+	currApi = 'https://dev78424.service-now.com/api/x_snc_polls/v1/poll/94a3961fdbc5730073c384da0b961941';
 	var arrPatch = [
 		{
 			"choices": [
@@ -119,9 +197,25 @@ function($scope,$http, spUtil) {//x_snc_polls_poll
 		spUtil.addErrorMessage(	$scope.postError );
 	})
 	
-	
-	
-	
+	$scope.updateProduct = function (product) {
+		$http({
+			url: baseUrl + product.id,
+			method: "PUT",
+			data: product
+		}).success(function (modifiedProduct) {
+			for (var i = 0; i < $scope.products.length; i++) {
+				if ($scope.products[i].id == modifiedProduct.id) {
+					$scope.products[i] = modifiedProduct;
+					break;
+				}
+			}
+			$scope.displayMode = "list";
+		});
+	}
+
+
+
+
 
 	// POST
 	var vote = {
@@ -137,13 +231,39 @@ function($scope,$http, spUtil) {//x_snc_polls_poll
 
 	$http.post(currApi, vote)
 		.success(function (data) {
-				console.log("LAB 3.1 POST");
-				console.log(data);
+		console.log("LAB 3.1 POST");
+		console.log(data);
 	}).error(function (error) {
-			$scope.postError = error;
-			spUtil.addErrorMessage(	$scope.postError );
+		$scope.postError = error;
+		spUtil.addErrorMessage(	$scope.postError );
 	})
 	
+	
+	$scope.createProduct = function (product) {
+		$http.post(baseUrl, product).success(function (newProduct) {
+			$scope.products.push(newProduct);
+			$scope.displayMode = "list";
+		});
+	}
+
+	
+	
+	// DELETE
+	$scope.deleteProduct = function (product) {
+		$http({
+			method: "DELETE",
+			url: baseUrl + product.id
+		}).success(function () {
+			$scope.products.splice($scope.products.indexOf(product), 1);
+		});
+	}
+	
+	
+	
+	
+	
+	
+
 }]]></client_script>
         <controller_as>c</controller_as>
         <css/>
@@ -271,6 +391,39 @@ function($scope,$http, spUtil) {//x_snc_polls_poll
 	request.setRequestBody("{\"votes\": [{\"vote\": \"Yellow\",\"question_id\": \"9f369ae6134b1200ed373d62f244b0d7\"}]}");
 	var response = request.execute();
 	gs.addInfoMessage("POSTED : "+response.getBody());
+	
+	
+	
+	// DELETE
+	var request = new sn_ws.RESTMessageV2();
+	request.setEndpoint('https://dev78424.service-now.com/api/x_snc_polls/v1/poll/3b3bda63db41b30073c384da0b961902');
+	request.setHttpMethod('DELETE');
+
+	//Eg. UserName="admin", Password="admin" for this code sample.
+	var user = 'admin';
+	var password = gs.getProperty("x_snc_polls.postman");
+
+	request.setBasicAuth(user,password);
+	request.setRequestHeader("Accept","application/json");
+
+	var response = request.execute();
+	//204 ok 203 record not found
+	gs.addInfoMessage("DELETE : "+response.getBody() + " " +response.getStatusCode() );
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 })();]]></script>
         <servicenow>false</servicenow>
@@ -278,14 +431,14 @@ function($scope,$http, spUtil) {//x_snc_polls_poll
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-01 20:24:41</sys_created_on>
         <sys_id>0b9c4697dbc5730073c384da0b9619ee</sys_id>
-        <sys_mod_count>8</sys_mod_count>
+        <sys_mod_count>17</sys_mod_count>
         <sys_name>Polls Rest APi</sys_name>
         <sys_package display_value="Polls" source="x_snc_polls">cd1f2766133e1200ed373d62f244b082</sys_package>
         <sys_policy/>
         <sys_scope display_value="Polls">cd1f2766133e1200ed373d62f244b082</sys_scope>
         <sys_update_name>sp_widget_0b9c4697dbc5730073c384da0b9619ee</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-01 21:14:30</sys_updated_on>
+        <sys_updated_on>2019-05-02 16:41:49</sys_updated_on>
         <template><![CDATA[<div><!-- your widget template --></div>]]></template>
     </sp_widget>
 </record_update>
