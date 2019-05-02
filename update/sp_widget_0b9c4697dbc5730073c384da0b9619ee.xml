@@ -89,7 +89,7 @@ function($scope,$http, spUtil) {//x_snc_polls_poll
 	
 	
 	// EDIT
-		currApi = 'https://dev78424.service-now.com/api/x_snc_polls/v1/poll/3c265ae6134b1200ed373d62f244b0fc';
+		currApi = 'https://dev78424.service-now.com/api/x_snc_polls/v1/poll/94a3961fdbc5730073c384da0b961941';
 	var arrPatch = [
 		{
 			"choices": [
@@ -235,7 +235,7 @@ function($scope,$http, spUtil) {//x_snc_polls_poll
 
 	// EDIT 
 	var request = new sn_ws.RESTMessageV2();
-	request.setEndpoint('https://dev78424.service-now.com/api/x_snc_polls/v1/poll/3c265ae6134b1200ed373d62f244b0fc');
+	request.setEndpoint('https://dev78424.service-now.com/api/x_snc_polls/v1/poll/94a3961fdbc5730073c384da0b961941');
 	request.setHttpMethod('PATCH');
 
 	//Eg. UserName="admin", Password="admin" for this code sample.
@@ -250,7 +250,7 @@ function($scope,$http, spUtil) {//x_snc_polls_poll
 	//gs.addInfoMessage("PACHED : "+response.getBody());
 
 	var response = request.execute();
-	gs.addInfoMessage("PATCHED : "+response.getBody());
+	gs.addInfoMessage("PATCHED : "+response.getBody() + " " + response.getStatusCode());
 
 
 	
@@ -278,14 +278,14 @@ function($scope,$http, spUtil) {//x_snc_polls_poll
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-01 20:24:41</sys_created_on>
         <sys_id>0b9c4697dbc5730073c384da0b9619ee</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_name>Polls Rest APi</sys_name>
         <sys_package display_value="Polls" source="x_snc_polls">cd1f2766133e1200ed373d62f244b082</sys_package>
         <sys_policy/>
         <sys_scope display_value="Polls">cd1f2766133e1200ed373d62f244b082</sys_scope>
         <sys_update_name>sp_widget_0b9c4697dbc5730073c384da0b9619ee</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-01 20:30:11</sys_updated_on>
+        <sys_updated_on>2019-05-01 21:14:30</sys_updated_on>
         <template><![CDATA[<div><!-- your widget template --></div>]]></template>
     </sp_widget>
 </record_update>
