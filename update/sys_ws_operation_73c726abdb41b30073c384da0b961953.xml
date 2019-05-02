@@ -6,7 +6,7 @@
         <default_operation_uri/>
         <enforce_acl/>
         <http_method>POST</http_method>
-        <name>Create Poll</name>
+        <name>Create Poll (v2)</name>
         <operation_script><![CDATA[(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
     var data = request.body.data;
     var pollHelper = new x_snc_polls.PollData_Creator();
@@ -38,28 +38,28 @@
     }
 
 })(request, response);]]></operation_script>
-        <operation_uri>/api/x_snc_polls/v1/poll</operation_uri>
+        <operation_uri>/api/x_snc_polls/v2/poll</operation_uri>
         <produces>application/json,application/xml,text/xml</produces>
         <produces_customized>false</produces_customized>
         <relative_path>/</relative_path>
         <request_example/>
         <requires_acl_authorization>false</requires_acl_authorization>
         <requires_authentication>true</requires_authentication>
-        <requires_snc_internal_role>false</requires_snc_internal_role>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
         <short_description/>
         <sys_class_name>sys_ws_operation</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2016-04-30 22:20:02</sys_created_on>
-        <sys_id>2ec79ee6134b1200ed373d62f244b0ea</sys_id>
+        <sys_created_on>2019-05-02 17:01:59</sys_created_on>
+        <sys_id>73c726abdb41b30073c384da0b961953</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>Create Poll</sys_name>
+        <sys_name>Create Poll (v2)</sys_name>
         <sys_package display_value="Polls" source="x_snc_polls">cd1f2766133e1200ed373d62f244b082</sys_package>
         <sys_policy/>
         <sys_scope display_value="Polls">cd1f2766133e1200ed373d62f244b082</sys_scope>
-        <sys_update_name>sys_ws_operation_2ec79ee6134b1200ed373d62f244b0ea</sys_update_name>
+        <sys_update_name>sys_ws_operation_73c726abdb41b30073c384da0b961953</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2016-04-30 22:20:02</sys_updated_on>
+        <sys_updated_on>2019-05-02 17:01:59</sys_updated_on>
         <web_service_definition display_value="Poll">e917dee6134b1200ed373d62f244b08f</web_service_definition>
-        <web_service_version display_value="v1">a227dee6134b1200ed373d62f244b0cd</web_service_version>
+        <web_service_version display_value="v2">3bc726abdb41b30073c384da0b96194b</web_service_version>
     </sys_ws_operation>
 </record_update>
