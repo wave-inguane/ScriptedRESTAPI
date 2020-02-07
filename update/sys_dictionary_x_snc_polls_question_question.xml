@@ -53,7 +53,7 @@
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2016-04-30 21:51:26</sys_created_on>
-        <sys_id>f1d60d17db05730073c384da0b961941</sys_id>
+        <sys_id>c4139e39db72001073c384da0b9619b8</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>Question</sys_name>
         <sys_package display_value="Polls" source="x_snc_polls">cd1f2766133e1200ed373d62f244b082</sys_package>
@@ -61,7 +61,7 @@
         <sys_scope display_value="Polls">cd1f2766133e1200ed373d62f244b082</sys_scope>
         <sys_update_name>sys_dictionary_x_snc_polls_question_question</sys_update_name>
         <sys_updated_by>system</sys_updated_by>
-        <sys_updated_on>2019-05-01 15:19:55</sys_updated_on>
+        <sys_updated_on>2020-02-07 01:03:05</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
