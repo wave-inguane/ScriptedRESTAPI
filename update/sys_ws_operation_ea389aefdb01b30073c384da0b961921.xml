@@ -4,7 +4,7 @@
         <consumes>application/json,application/xml,text/xml</consumes>
         <consumes_customized>false</consumes_customized>
         <default_operation_uri/>
-        <enforce_acl>cf9d01d3e73003009d6247e603f6a990,7cf9de2a134b1200ed373d62f244b050</enforce_acl>
+        <enforce_acl>7cf9de2a134b1200ed373d62f244b050,0cf4fafddbf2001073c384da0b96192f</enforce_acl>
         <http_method>DELETE</http_method>
         <name>Delete poll</name>
         <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
@@ -35,14 +35,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-02 15:54:50</sys_created_on>
         <sys_id>ea389aefdb01b30073c384da0b961921</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_name>Delete poll</sys_name>
         <sys_package display_value="Polls" source="x_snc_polls">cd1f2766133e1200ed373d62f244b082</sys_package>
         <sys_policy/>
         <sys_scope display_value="Polls">cd1f2766133e1200ed373d62f244b082</sys_scope>
         <sys_update_name>sys_ws_operation_ea389aefdb01b30073c384da0b961921</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-02 16:15:12</sys_updated_on>
+        <sys_updated_by>london.admin</sys_updated_by>
+        <sys_updated_on>2020-02-07 03:35:56</sys_updated_on>
         <web_service_definition display_value="Poll">e917dee6134b1200ed373d62f244b08f</web_service_definition>
         <web_service_version display_value="v1">a227dee6134b1200ed373d62f244b0cd</web_service_version>
     </sys_ws_operation>
