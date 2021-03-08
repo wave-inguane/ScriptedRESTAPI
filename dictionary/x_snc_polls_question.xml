@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<database>
+<?xml version="1.0" encoding="UTF-8"?><database>
     <element label="Question" max_length="40" name="x_snc_polls_question" type="collection">
         <element default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
         <element label="Poll" max_length="32" name="poll" reference="x_snc_polls_poll" reference_cascade_rule="delete" type="reference"/>
