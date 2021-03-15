@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl/>
+        <http_method>POST</http_method>
+        <name>Vote (v2)</name>
+        <operation_script><![CDATA[(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+    var pollId = request.pathParams.poll_id;
+    var pollHelper = new x_snc_polls.PollData_Creator();
+
+    // Validate if poll record exists
+    var pollRecord = new GlideRecordSecure("x_snc_polls_poll");
+    pollRecord.get(pollId);
+
+    var voteData = request.body.data.votes;
+
+    // Record votes
+    pollHelper.voteInPoll(voteData, pollId);
+
+    // Set response details
+    response.setStatus(201);
+	response.setContentType("application/json");
+	var responseBody = '{"message":"Voting successful"}';
+	response.getStreamWriter().writeString(responseBody);
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_snc_polls/v2/poll/{poll_id}/vote</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/{poll_id}/vote</relative_path>
+        <request_example/>
+        <requires_acl_authorization>false</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>newyork.admin</sys_created_by>
+        <sys_created_on>2021-03-15 00:10:16</sys_created_on>
+        <sys_id>3616d85b2ff6a4100cc754492799b685</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Vote (v2)</sys_name>
+        <sys_package display_value="Polls" source="x_snc_polls">cd1f2766133e1200ed373d62f244b082</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Polls">cd1f2766133e1200ed373d62f244b082</sys_scope>
+        <sys_update_name>sys_ws_operation_3616d85b2ff6a4100cc754492799b685</sys_update_name>
+        <sys_updated_by>newyork.admin</sys_updated_by>
+        <sys_updated_on>2021-03-15 00:10:16</sys_updated_on>
+        <web_service_definition display_value="Poll">e917dee6134b1200ed373d62f244b08f</web_service_definition>
+        <web_service_version display_value="v2">3216d05b2ff6a4100cc754492799b6e6</web_service_version>
+    </sys_ws_operation>
+</record_update>
